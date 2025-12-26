@@ -237,8 +237,40 @@ li input[type="text"] {
   font-weight: 500;
 }
 
+/* Checkbox Button */
+.checkbox {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: transparent;
+  padding: 0;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.checkbox:hover {
+  background: rgba(72, 219, 251, 0.2);
+  border-color: var(--success);
+  transform: scale(1.1);
+}
+
+.checkbox.checked {
+  background: linear-gradient(135deg, var(--success) 0%, #00d2ff 100%);
+  border-color: var(--success);
+  color: white;
+  box-shadow: 0 4px 12px rgba(72, 219, 251, 0.4);
+}
+
 /* Action Buttons (Edit, Delete, Save) */
-li button {
+li button:not(.checkbox) {
   background: rgba(255, 255, 255, 0.15);
   border: 1.5px solid rgba(255, 255, 255, 0.25);
   color: white;
@@ -253,6 +285,7 @@ li button {
   height: 40px;
   font-size: 1.2rem;
   font-weight: 600;
+  flex-shrink: 0;
 }
 
 li button:hover {
@@ -260,6 +293,34 @@ li button:hover {
   border-color: transparent;
   transform: scale(1.15) rotate(5deg);
   box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+}
+
+.edit-btn:hover {
+  background: linear-gradient(135deg, #feca57 0%, #ff9ff3 100%);
+  border-color: transparent;
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(254, 202, 87, 0.5);
+}
+
+.save-btn:hover {
+  background: linear-gradient(135deg, var(--success) 0%, #00d2ff 100%);
+  border-color: transparent;
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(72, 219, 251, 0.5);
+}
+
+.delete-btn:hover {
+  background: linear-gradient(135deg, var(--danger) 0%, #ff4757 100%);
+  border-color: transparent;
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(255, 99, 72, 0.5);
+}
+
+@keyframes slideOut {
+  to {
+    opacity: 0;
+    transform: translateX(100%) scale(0.8);
+  }
 }
 
 /* AI Summary Section */
