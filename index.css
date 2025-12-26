@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap');
 
 :root {
-  --primary: #8b5cf6;
-  --primary-hover: #7c3aed;
+  --primary: #06b6d4;
+  --primary-hover: #0891b2;
+  --secondary: #14b8a6;
   --success: #10b981;
   --danger: #ef4444;
-  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  --bg-gradient: linear-gradient(135deg, #0c1222 0%, #0f2027 50%, #203a43 100%);
   --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-highlight: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(6, 182, 212, 0.2);
+  --glass-highlight: rgba(6, 182, 212, 0.1);
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
-  --input-bg: rgba(0, 0, 0, 0.2);
+  --input-bg: rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -39,7 +40,7 @@ body {
   padding: 2rem 2.5rem;
   border-radius: 1.5rem;
   border: 1px solid var(--glass-border);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 25px 50px -12px rgba(6, 182, 212, 0.3);
   width: 100%;
   max-width: 600px;
   animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -62,7 +63,8 @@ h1 {
   font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: 2rem;
-  background: linear-gradient(to right, #fff, #94a3b8);
+  background: linear-gradient(135deg, #06b6d4 0%, #14b8a6 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.05em;
@@ -90,9 +92,9 @@ input[type="text"] {
 }
 
 input[type="text"]:focus {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
   border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+  box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.15);
 }
 
 input[type="text"]::placeholder {
@@ -104,7 +106,7 @@ input[type="text"]::placeholder {
 #summaryBtn {
   padding: 0 1.5rem;
   border: none;
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: white;
   border-radius: 1rem;
   cursor: pointer;
@@ -116,9 +118,8 @@ input[type="text"]::placeholder {
 
 #addBtn:hover,
 #summaryBtn:hover {
-  background: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 8px 20px rgba(6, 182, 212, 0.4);
 }
 
 #addBtn:active,
@@ -160,8 +161,9 @@ li {
 
 li:hover {
   background: var(--glass-highlight);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: var(--primary);
   transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
 }
 
 li span {
@@ -187,9 +189,9 @@ li input[type="text"] {
 
 /* Action Buttons (Edit, Delete, Save) */
 li button {
-  background: transparent;
+  background: rgba(6, 182, 212, 0.1);
   border: 1px solid var(--glass-border);
-  color: var(--text-secondary);
+  color: var(--primary);
   padding: 0.5rem;
   border-radius: 0.75rem;
   cursor: pointer;
@@ -199,12 +201,14 @@ li button {
   justify-content: center;
   width: 36px;
   height: 36px;
+  font-size: 1.1rem;
 }
 
 li button:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(6, 182, 212, 0.2);
   color: white;
   transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.3);
 }
 
 /* AI Summary Section */
@@ -220,15 +224,15 @@ li button:hover {
 #summaryBtn {
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  background: linear-gradient(135deg, #06b6d4 0%, #14b8a6 100%);
 }
 
 #summaryBtn:hover {
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.5);
 }
 
 #summaryOutput {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.3);
   padding: 1rem;
   border-radius: 1rem;
   color: var(--text-secondary);
@@ -236,6 +240,15 @@ li button:hover {
   line-height: 1.6;
   min-height: 60px;
   border: 1px dashed var(--glass-border);
+}
+
+#summaryOutput a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+#summaryOutput a:hover {
+  color: var(--secondary);
 }
 
 /* Responsiveness */

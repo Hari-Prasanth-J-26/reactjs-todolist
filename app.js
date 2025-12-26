@@ -35,7 +35,8 @@ function addTask(text, isCompleted = false) {
 
   // Edit button
   const editBtn = document.createElement("button");
-  editBtn.textContent = "✏️";
+  editBtn.innerHTML = "✎";
+  editBtn.title = "Edit task";
   editBtn.addEventListener("click", () => {
     const input = document.createElement("input");
     input.type = "text";
@@ -44,7 +45,8 @@ function addTask(text, isCompleted = false) {
     input.focus();
 
     const saveBtn = document.createElement("button");
-    saveBtn.textContent = "💾";
+    saveBtn.innerHTML = "✓";
+    saveBtn.title = "Save";
     li.replaceChild(saveBtn, editBtn);
 
     input.addEventListener("keyup", (e) => {
@@ -107,24 +109,40 @@ const summaryBtn = document.getElementById("summaryBtn");
 const summaryOutput = document.getElementById("summaryOutput");
 
 summaryBtn.addEventListener("click", async () => {
-  summaryOutput.textContent = "Generating summary...";
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
   if (tasks.length === 0) {
-    summaryOutput.textContent = "You have no tasks yet!";
+    summaryOutput.textContent = "📝 Add some tasks first to get a summary!";
     return;
   }
 
-  const taskListText = tasks.map((t, i) => 
-    `${i + 1}. ${t.text} (${t.completed ? "done" : "pending"})`
+  summaryOutput.textContent = "✨ Generating AI summary...";
+
+  const taskListText = tasks.map((t, i) =>
+    `${i + 1}. ${t.text} (${t.completed ? "✓ done" : "⏳ pending"})`
   ).join("\n");
+
+  // Check if API key is configured
+  const apiKey = "YOUR_API_KEY_HERE";
+
+  if (apiKey === "YOUR_API_KEY_HERE") {
+    summaryOutput.innerHTML = `
+      <strong>🔑 API Key Not Configured</strong><br><br>
+      To enable AI summaries:<br>
+      1. Get an API key from <a href="https://platform.openai.com/api-keys" target="_blank" style="color: var(--primary)">OpenAI</a><br>
+      2. Replace "YOUR_API_KEY_HERE" in app.js with your key<br><br>
+      <em>Your tasks:</em><br>
+      ${taskListText.split('\n').join('<br>')}
+    `;
+    return;
+  }
 
   try {
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer YOUR_API_KEY_HERE` 
+        "Authorization": `Bearer ${apiKey}`
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
@@ -135,12 +153,20 @@ summaryBtn.addEventListener("click", async () => {
       })
     });
 
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status}`);
+    }
+
     const data = await response.json();
     const summary = data.choices[0].message.content;
     summaryOutput.textContent = summary;
   } catch (error) {
     console.error("Error:", error);
-    summaryOutput.textContent = "Oops! Something went wrong while summarizing.";
+    summaryOutput.innerHTML = `
+      <strong>⚠️ Unable to generate summary</strong><br><br>
+      ${error.message}<br><br>
+      <em>Your tasks:</em><br>
+      ${taskListText.split('\n').join('<br>')}
+    `;
   }
 });
-
