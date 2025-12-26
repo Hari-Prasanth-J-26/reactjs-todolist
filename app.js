@@ -123,7 +123,7 @@ summaryBtn.addEventListener("click", async () => {
   ).join("\n");
 
   // Check if API key is configured
-  const apiKey = "YOUR_API_KEY_HERE";
+  const apiKey = "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";
 
   if (apiKey === "YOUR_API_KEY_HERE") {
     summaryOutput.innerHTML = `
