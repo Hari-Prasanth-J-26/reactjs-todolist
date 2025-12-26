@@ -1,0 +1,9 @@
+[build]
+  # No build command needed - this is a static HTML/CSS/JS project
+  command = "echo 'No build required for static site'"
+  publish = "."
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
